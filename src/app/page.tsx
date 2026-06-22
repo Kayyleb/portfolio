@@ -30,6 +30,8 @@ export default function Home() {
 
           {/* Project blocks: */}
           <div className="parent">
+          
+          <a href="https://kaylebcook.dev">
           <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Sprout - Mobile Finance Tracker
@@ -41,7 +43,9 @@ export default function Home() {
               them various summaries of where their finances stand whether it be retirement account, savings, checking, investments, or debt. 
             </p>
           </div>
+          </a>
 
+          <a href="https://store.steampowered.com/app/4808100/Depths/">
           <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Depths - 3D Multiplayer Game
@@ -53,7 +57,9 @@ export default function Home() {
              if you and your friends hope to make it out alive.​
             </p>
           </div>
+          </a>
 
+          <a href="https://workouttracker-b5aab.web.app/">
           <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Zenith - Personalized Workout App
@@ -65,6 +71,8 @@ export default function Home() {
               user's workout information into a database where their information will be kept secure, and able to be tracked within the app.
             </p>
           </div>
+          </a>
+
         </div>
         </div>
 

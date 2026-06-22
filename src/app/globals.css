@@ -23,3 +23,9 @@ body {
   flex: 1;
   margin: 5px;
 }
+
+.link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
