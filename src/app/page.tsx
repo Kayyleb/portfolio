@@ -6,7 +6,7 @@ export default function Home() {
           Kayleb Cook
         </h1>
 
-        <p className="mt-4 text-lg leading-relaxed text-neutral-600 light:text-neutral-300">
+        <p className="mt-4 text-lg leading-relaxed text-neutral-600">
           Software Engineer --
           Backend · Full Stack · Machine Learning · Mobile Development · Game Development
         </p>
@@ -16,7 +16,7 @@ export default function Home() {
               About Me: 
           </h1>
 
-          <p className="mt-3 leading-relaxed text-neutral-700 light:text-neutral-300">
+          <p className="mt-3 leading-relaxed text-neutral-700">
               I am a software engineering student at Oregon Tech with a passion for learning and creating impactful projects.
               With my experience from coursework and personal projects, I have developed a strong foundaton in software development, 
               and I am eager to apply my skills to real world scenarios.
@@ -29,36 +29,36 @@ export default function Home() {
           </h2>
 
           {/* Project blocks: */}
-          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md dark:border-neutral-800">
+          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Sprout - Mobile Finance Tracker
             </h3>
 
-            <p className="mt-2 leading-relaxed text-neutral-700 light:text-neutral-300">
+            <p className="mt-2 leading-relaxed text-neutral-700">
               Sprout is a personal finance and money managing app that is dedicated to help the user track finances, manage their budget, 
               and understand their financial standing. Sprout will be able to connect directly to the user's financial accounts and give 
               them various summaries of where their finances stand whether it be retirement account, savings, checking, investments, or debt. 
             </p>
           </div>
 
-          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md dark:border-neutral-800">
+          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Depths - 3D Multiplayer Game
             </h3>
 
-            <p className="mt-2 leading-relaxed text-neutral-700 light:text-neutral-300">
+            <p className="mt-2 leading-relaxed text-neutral-700">
              Depths is a cooperative multiplayer game where you and up to three friends​ delve into procedurally generated caves, 
              collecting items,​ going deeper, making sure to meet quota every dive. Avoid the monsters that dwell in these caverns​ 
              if you and your friends hope to make it out alive.​
             </p>
           </div>
 
-          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md dark:border-neutral-800">
+          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Zenith - Personalized Workout App
             </h3>
 
-            <p className="mt-2 leading-relaxed text-neutral-700 light:text-neutral-300">
+            <p className="mt-2 leading-relaxed text-neutral-700">
               The user will be allowed to create and edit a workout template for themselves when creating an account; then the 
               application will help monitor and track sets, reps, personal records, day streaks, and rest days by storing the 
               user's workout information into a database where their information will be kept secure, and able to be tracked within the app.
@@ -70,8 +70,8 @@ export default function Home() {
           <h2 className="text-2xl font-semibold tracking-tight">
             Contact Me: 
           </h2>
-          <p className="mt-3 leading-relaxed text-neutral-700 light:text-neutral-300">
-            {" "}
+          <p className="mt-3 leading-relaxed text-neutral-700">
+            If you would like to get in touch, please feel free to reach out to me via email at{" "}
             <a
               href="mailto: KaylebJulianCook@gmail.com"
               className="inline-flex items-center gap-1.5 text-blue-500 underline underline-offset-2 hover:text-blue-600"
@@ -92,7 +92,7 @@ export default function Home() {
               KaylebJulianCook@gmail.com
             </a>
               <br />
-            {" "}
+            Or connect with me on LinkedIn at{" "}
             <a
               href="https://www.linkedin.com/in/kaylebcook/"
               className="inline-flex items-center gap-1.5 text-blue-500 underline underline-offset-2 hover:text-blue-600"
@@ -107,12 +107,10 @@ export default function Home() {
               </svg>
               https://www.linkedin.com/in/kaylebcook/
             </a>
-
-            <br />
-            
-            {" "}
+              <br />
+            Or check out my code on GitHub at{" "}
             <a
-              href="https://github.com/Kayyleb"
+              href="https://github.com/kayyleb"
               className="inline-flex items-center gap-1.5 text-blue-500 underline underline-offset-2 hover:text-blue-600"
             >
               <svg
