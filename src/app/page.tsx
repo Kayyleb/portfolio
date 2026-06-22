@@ -29,10 +29,12 @@ export default function Home() {
           </h2>
 
           {/* Project blocks: */}
-          <div className="parent">
-          
-          <a href="https://kaylebcook.dev">
-          <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
+          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+          <a
+            href="https://kaylebcook.dev"
+            className="group block rounded-xl border border-neutral-200 p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md"
+          >
             <h3 className="text-xl font-bold">
               Sprout - Mobile Finance Tracker
             </h3>
@@ -42,11 +44,29 @@ export default function Home() {
               and understand their financial standing. Sprout will be able to connect directly to the user's financial accounts and give 
               them various summaries of where their finances stand whether it be retirement account, savings, checking, investments, or debt. 
             </p>
-          </div>
+
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-500 group-hover:text-blue-600">
+              View project
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
           </a>
 
-          <a href="https://store.steampowered.com/app/4808100/Depths/">
-          <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
+          <a
+            href="https://store.steampowered.com/app/4808100/Depths/"
+            className="group block rounded-xl border border-neutral-200 p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md"
+          >
             <h3 className="text-xl font-bold">
               Depths - 3D Multiplayer Game
             </h3>
@@ -56,11 +76,29 @@ export default function Home() {
              collecting items,​ going deeper, making sure to meet quota every dive. Avoid the monsters that dwell in these caverns​ 
              if you and your friends hope to make it out alive.​
             </p>
-          </div>
+
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-500 group-hover:text-blue-600">
+              View project
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
           </a>
 
-          <a href="https://workouttracker-b5aab.web.app/">
-          <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
+          <a
+            href="https://workouttracker-b5aab.web.app/"
+            className="group block rounded-xl border border-neutral-200 p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md sm:col-span-2"
+          >
             <h3 className="text-xl font-bold">
               Zenith - Personalized Workout App
             </h3>
@@ -70,7 +108,23 @@ export default function Home() {
               application will help monitor and track sets, reps, personal records, day streaks, and rest days by storing the 
               user's workout information into a database where their information will be kept secure, and able to be tracked within the app.
             </p>
-          </div>
+
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-500 group-hover:text-blue-600">
+              View project
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
           </a>
 
         </div>
