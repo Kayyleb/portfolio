@@ -6,22 +6,55 @@ export default function Home() {
           Kayleb Cook
         </h1>
 
-        <p className="mt-4 text-lg leading-relaxed text-neutral-600">
-          Software Engineer --
-          Backend · Full Stack · Machine Learning · Mobile Development · Game Development
-        </p>
-
         <div className="mt-10">
           <h1 className="text-2xl font-semibold tracking-tight">
               About Me: 
           </h1>
 
           <p className="mt-3 leading-relaxed text-neutral-700">
-              I am a software engineering student at Oregon Tech with a passion for learning and creating impactful projects.
-              With my experience from coursework and personal projects, I have developed a strong foundaton in software development, 
-              and I am eager to apply my skills to real world scenarios.
+              I am a software engineering student at Oregon Tech with a passion for learning and creating impactful projects. I have experience in various
+              programming languages and frameworks, and I am always open minded to exploring more technologies. 
+              <br />
+              I enjoy focusing on backend work, such as database management, API development, and functional programming, but I also have some experience in frontend development 
+              and game development, and I want to continute to expand my knowlednde in those areas. 
+
+              
           </p>
         </div>
+
+        <div className="mt-10">
+          <h2 className="text-2xl font-semibold tracking-tight">
+              Skills: 
+          </h2>
+
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            JavaScript
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            React
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Next.js
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Python
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            C#
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            C++
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            SQL
+          </span>
+                  <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Git
+          </span>
+          </div>
+        </div>
+      
 
         <div className="mt-14">
           <h2 className="text-2xl font-semibold tracking-tight">
@@ -44,6 +77,21 @@ export default function Home() {
               and understand their financial standing. Sprout will be able to connect directly to the user's financial accounts and give 
               them various summaries of where their finances stand whether it be retirement account, savings, checking, investments, or debt. 
             </p>
+
+          <br />
+            <span className="whitespace-nowrap rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            React Native
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Python
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            SQLite
+          </span>
+          <span className="whitespace-nowrap rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Plaid API
+          </span>
+          <br />
 
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-500 group-hover:text-blue-600">
               View project
@@ -77,6 +125,21 @@ export default function Home() {
              if you and your friends hope to make it out alive.​
             </p>
 
+          <br />
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Unity
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            C#
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            JSON
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Blender
+          </span>
+          <br />
+
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-500 group-hover:text-blue-600">
               View project
               <svg
@@ -108,6 +171,18 @@ export default function Home() {
               application will help monitor and track sets, reps, personal records, day streaks, and rest days by storing the 
               user's workout information into a database where their information will be kept secure, and able to be tracked within the app.
             </p>
+
+          <br />
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            React
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            JavaScript
+          </span>
+            <span className="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-sm font-medium text-neutral-700">
+            Firebase
+          </span>
+          <br />
 
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-500 group-hover:text-blue-600">
               View project
