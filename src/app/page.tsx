@@ -29,7 +29,8 @@ export default function Home() {
           </h2>
 
           {/* Project blocks: */}
-          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
+          <div className="parent">
+          <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Sprout - Mobile Finance Tracker
             </h3>
@@ -41,7 +42,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
+          <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Depths - 3D Multiplayer Game
             </h3>
@@ -53,7 +54,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
+          <div className="child mt-5 rounded-xl border border-neutral-200 p-6 shadow-sm transition-shadow hover:shadow-md">
             <h3 className="text-xl font-bold">
               Zenith - Personalized Workout App
             </h3>
@@ -65,13 +66,14 @@ export default function Home() {
             </p>
           </div>
         </div>
+        </div>
 
         <div className="mt-14 mb-6">
           <h2 className="text-2xl font-semibold tracking-tight">
             Contact Me: 
           </h2>
           <p className="mt-3 leading-relaxed text-neutral-700">
-            If you would like to get in touch, please feel free to reach out to me via email at{" "}
+            {" "}
             <a
               href="mailto: KaylebJulianCook@gmail.com"
               className="inline-flex items-center gap-1.5 text-blue-500 underline underline-offset-2 hover:text-blue-600"
@@ -92,7 +94,7 @@ export default function Home() {
               KaylebJulianCook@gmail.com
             </a>
               <br />
-            Or connect with me on LinkedIn at{" "}
+            {" "}
             <a
               href="https://www.linkedin.com/in/kaylebcook/"
               className="inline-flex items-center gap-1.5 text-blue-500 underline underline-offset-2 hover:text-blue-600"
@@ -108,7 +110,7 @@ export default function Home() {
               https://www.linkedin.com/in/kaylebcook/
             </a>
               <br />
-            Or check out my code on GitHub at{" "}
+            {" "}
             <a
               href="https://github.com/kayyleb"
               className="inline-flex items-center gap-1.5 text-blue-500 underline underline-offset-2 hover:text-blue-600"

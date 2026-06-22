@@ -14,3 +14,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+.parent {
+  display: flex;
+}
+
+.child {
+  flex: 1;
+  margin: 5px;
+}
