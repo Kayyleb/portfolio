@@ -43,9 +43,8 @@ export default function RootLayout({
         <main style={{ padding: '20px' }}>
           {children}
         </main>
-      
-      
-       className="min-h-full flex flex-col"{children}</body>
+       
+       </body>
     </html>
   );
 }
