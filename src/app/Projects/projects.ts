@@ -4,6 +4,7 @@ export type Project = {
     skills: string[];
     link: string;
     image: string;
+    featured: boolean;
   };
 
   export const projects: Project[] = [
@@ -13,6 +14,7 @@ export type Project = {
       skills: ["React Native", "Python", "SQLite", "Plaid API"],
       link: "https://github.com/kayyleb/Sprout",
       image: "/sprout.jpg",
+      featured: true,
     },
     {
       name: "Depths - 3D Multiplayer Game",
@@ -20,6 +22,7 @@ export type Project = {
       skills: ["Unity", "C#", "JSON", "Blender"],
       link: "https://store.steampowered.com/app/4808100/Depths/",
       image: "/depths.jpg",
+      featured: true,
     },
     {
       name: "Zenith - Personalized Workout Application",
@@ -27,6 +30,7 @@ export type Project = {
       skills: ["React", "JavaScript", "Firebase"],
       link: "https://workouttracker-b5aab.web.app/",
       image: "/zenith.jpg",
+      featured: true,
     },
     {
       name: "Portfolio Website",
@@ -34,6 +38,7 @@ export type Project = {
       skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
       link: "https://github.com/kayyleb/portfolio",
       image: "/portfolio.jpg",
+      featured: false,
     },
     {
       name: "Used Car Price Predictor",
@@ -41,5 +46,6 @@ export type Project = {
       skills: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
       link: "https://github.com/kayyleb/Used_Car_Price_Predictor",
       image: "/predictor.jpg",
+      featured: false,
     }
   ];
