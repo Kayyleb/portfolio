@@ -23,7 +23,11 @@ export default function Home() {
               Software Engineering Student
             </p>
 
-            <div className="mt-4 flex items-center gap-5">
+            <p className="text-md font-semibold tracking-tight text-forest">
+              Klamath Falls, Oregon
+            </p>
+
+            <div className="mt-4 flex items-center gap-5 text-accent">
               <a
                 href="mailto:KaylebJulianCook@gmail.com"
                 target="_blank"
