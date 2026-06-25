@@ -3,23 +3,31 @@ type props = {
     description: string;
     skills: string[];
     link: string;
+    image: string;
   };
 
   export default function ProjectCard({ 
     name, 
     description, 
     skills, 
-    link }: props) {
+    link, 
+    image }: props) {
     return (
         <a href={link}
         className="group flex h-full flex-col rounded-xl border border-border bg-surface p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
             >
         
-        <h2 className="text-xl font-bold">
+        <img
+            src={image}
+            alt={name}
+            className="h-50 w-full rounded-lg border border-border object-cover"
+        />
+
+        <h2 className="text-xl font-bold text-center text-forest mt-4">
             {name}
         </h2>
 
-        <p className="mt-2 flex-1 leading-relaxed text-muted">
+        <p className="mt-2 flex-1 leading-relaxed text-muted whitespace-pre-line">
             {description}
         </p>
 
