@@ -35,7 +35,6 @@ export default function RootLayout({
           <nav style={{ display: 'flex', gap: '15px' }}>
             <Link href="/">Home</Link>
             <Link href="/Projects">Projects</Link>
-            <Link href="/Contact">Contact</Link>
           </nav>
         </header>
 

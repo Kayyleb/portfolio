@@ -26,6 +26,8 @@ export default function Home() {
             <div className="mt-4 flex items-center gap-5">
               <a
                 href="mailto:KaylebJulianCook@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Email Kayleb Cook"
                 className="text-accent hover:text-ink"
               >
@@ -46,6 +48,8 @@ export default function Home() {
 
               <a
                 href="https://www.linkedin.com/in/kaylebcook/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Kayleb Cook on LinkedIn"
                 className="text-accent hover:text-ink"
               >
@@ -61,6 +65,8 @@ export default function Home() {
 
               <a
                 href="https://github.com/kayyleb"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Kayleb Cook on GitHub"
                 className="text-accent hover:text-ink"
               >

@@ -14,6 +14,8 @@ type props = {
     image }: props) {
     return (
         <a href={link}
+            target="_blank"
+            rel="noopener noreferrer"
         className="group flex h-full flex-col rounded-xl border border-border bg-surface p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
             >
         
