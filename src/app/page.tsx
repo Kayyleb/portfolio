@@ -1,5 +1,7 @@
 import ProjectCard from "./Projects/components/ProjectCard";
 import { projects } from "./Projects/projects";
+import ExperienceTimeline from "./Experience/components/ExperienceTimeline";
+import { experiences } from "./Experience/experience";
 
 export default function Home() {
   const featuredProjects = projects.filter((project) => project.featured);
@@ -101,6 +103,16 @@ export default function Home() {
                 {skill}
               </span>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-20">
+          <h2 className="text-2xl font-semibold tracking-tight text-forest">
+            Experience:
+          </h2>
+
+          <div className="mt-6">
+            <ExperienceTimeline experiences={experiences.filter((experience) => experience.current)} />
           </div>
         </div>
 
