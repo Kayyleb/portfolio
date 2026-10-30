@@ -9,6 +9,7 @@ export type Project = {
     linkLabel?: string;
     images: string[]; // all show in the gallery; the first is the cover unless `cover` is set
     cover?: string; // card image that isn't part of the gallery, e.g. a logo
+    playable?: "billiards"; // game that can be played right on the project page
     featured: boolean;
   };
 
@@ -65,6 +66,20 @@ export type Project = {
       skills: ["JavaScript", "HTML", "CSS"],
       images: ["/ashtray-home.png", "/ashtray-entry.png", "/ashtray-log.png", "/ashtray-search.png", "/ashtray-shelf.png"],
       cover: "/ashtray-cover.png",
+      featured: false,
+    },
+    {
+      slug: "web-billiards",
+      name: "Web Billiards",
+      tagline: "8-Ball Pool in the Browser",
+      label: "Playable in Browser",
+      description: "Web Billiards is an 8-ball pool game that runs in the browser, where you can play a computer opponent or a friend on the same device. It has its own physics engine with spin (follow, draw and side), real 8-ball rules for groups, fouls, ball in hand and calling the 8, and an aim line that predicts where the cue ball and object ball will go. The computer opponent finds every possible pot, simulates each through the physics engine, and picks the shot that pots a ball and leaves the best next shot, with easy, normal and hard difficulty. All the art and sound effects are generated in code, with no image or audio files.",
+      skills: ["TypeScript", "Phaser", "Next.js", "React"],
+      link: "https://github.com/Kayyleb/web_billiards",
+      linkLabel: "View code",
+      images: [],
+      cover: "/billiards-cover.png",
+      playable: "billiards",
       featured: false,
     },
     {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ExternalLinkButton from "../components/ExternalLinkButton";
 import ProjectGallery from "../components/ProjectGallery";
+import BilliardsGame from "../components/BilliardsGame";
 import { projects } from "../projects";
 
 // Builds one page per project ahead of time
@@ -70,6 +71,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </span>
             ))}
         </div>
+
+        {project.playable === "billiards" && (
+            <>
+                <h2 className="mt-12 text-xl font-semibold tracking-tight text-forest">
+                    Play it
+                </h2>
+                <div className="mt-4">
+                    <BilliardsGame />
+                </div>
+            </>
+        )}
 
         {project.images.length > 0 && (
             <>
