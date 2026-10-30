@@ -52,7 +52,7 @@
       ],
       languages: ["Next.js", "TypeScript", "Supabase", "Vercel"],
       technical: true,
-      projectLink: "/Projects",
+      projectLink: "/Projects/basin-time-tracker",
     },
     {
       company: "Basin Family Janitorial",

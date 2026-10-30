@@ -123,14 +123,7 @@ export default function Home() {
 
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {featuredProjects.map((project) => (
-              <ProjectCard
-                key={project.name}
-                name={project.name}
-                description={project.description}
-                skills={project.skills}
-                link={project.link}
-                image={project.image}
-              />
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>
