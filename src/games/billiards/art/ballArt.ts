@@ -12,6 +12,7 @@ const R = CONFIG.BALL_R;
 const SPOT_COS = 0.8;                       // angular size of the number spot
 const SPOT_SIN = Math.sqrt(1 - SPOT_COS * SPOT_COS);
 const SPOT_EDGE = 0.025;
+const MIN_VISIBLE_ROLL = 0.5;               // px of roll before a redraw is worth it
 const STRIPE_HALF = 0.5;
 const CREAM: [number, number, number] = [246, 242, 230];
 const INK: [number, number, number] = [22, 22, 22];
@@ -116,8 +117,10 @@ export class BallSkin {
   private image: ImageData;
   // Rotation taking ball-local coordinates to view coordinates (row-major 3x3).
   // View space: x right, y down, z toward the viewer.
-  private m = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+  private m = new Float64Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+  private scratch = new Float64Array(9);   // reused by rotate() so rolling never allocates
   private dirty = true;
+  private unrendered = 0;                  // px rolled since the last redraw
   private rolls = 0;
   private readonly base: [number, number, number];
   private readonly striped: boolean;
@@ -157,11 +160,19 @@ export class BallSkin {
     const d = Math.hypot(dx, dy);
     if (d < 1e-4) return;
     this.rotate(-dy / d, dx / d, 0, d / R);
+    this.unrendered += d;
+  }
+
+  // Redraw only once the ball has turned enough to see. Slow balls creep by
+  // fractions of a pixel, and each redraw re-uploads the texture to the GPU.
+  renderIfVisible(): void {
+    if (this.unrendered >= MIN_VISIBLE_ROLL) this.render();
   }
 
   render(): void {
     if (!this.dirty) return;
     this.dirty = false;
+    this.unrendered = 0;
     const px = pixelTable(this.scale);
     const m = this.m;
     const out = this.image.data;
@@ -221,18 +232,19 @@ export class BallSkin {
     const c = Math.cos(angle);
     const s = Math.sin(angle);
     const t = 1 - c;
-    const q = [
-      c + t * kx * kx, t * kx * ky - s * kz, t * kx * kz + s * ky,
-      t * kx * ky + s * kz, c + t * ky * ky, t * ky * kz - s * kx,
-      t * kx * kz - s * ky, t * ky * kz + s * kx, c + t * kz * kz,
-    ];
+    const q0 = c + t * kx * kx, q1 = t * kx * ky - s * kz, q2 = t * kx * kz + s * ky;
+    const q3 = t * kx * ky + s * kz, q4 = c + t * ky * ky, q5 = t * ky * kz - s * kx;
+    const q6 = t * kx * kz - s * ky, q7 = t * ky * kz + s * kx, q8 = c + t * kz * kz;
     const m = this.m;
-    const r = new Array<number>(9);
-    for (let row = 0; row < 3; row++) {
-      for (let col = 0; col < 3; col++) {
-        r[row * 3 + col] = q[row * 3] * m[col] + q[row * 3 + 1] * m[3 + col] + q[row * 3 + 2] * m[6 + col];
-      }
+    const r = this.scratch;
+    for (let col = 0; col < 3; col++) {
+      const m0 = m[col], m1 = m[3 + col], m2 = m[6 + col];
+      r[col] = q0 * m0 + q1 * m1 + q2 * m2;
+      r[3 + col] = q3 * m0 + q4 * m1 + q5 * m2;
+      r[6 + col] = q6 * m0 + q7 * m1 + q8 * m2;
     }
+    // Swap buffers instead of allocating a new matrix
+    this.scratch = m;
     this.m = r;
     if (++this.rolls % 30 === 0) this.orthonormalize();
     this.dirty = true;
@@ -246,7 +258,7 @@ export class BallSkin {
     const d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
     b = norm(b[0] - d * a[0], b[1] - d * a[1], b[2] - d * a[2]);
     const c = [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-    this.m = [...a, ...b, ...c];
+    this.m.set([...a, ...b, ...c]);
   }
 }
 

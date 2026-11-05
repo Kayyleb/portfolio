@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Experience } from "../experience";
 
@@ -19,9 +20,11 @@ type props = {
             <li key={`${experience.company}-${experience.role}`} className="flex gap-4 sm:gap-6">
               <div className="flex w-12 shrink-0 justify-center sm:w-16">
                 {!sameCompanyAsPrevious && (
-                  <img
+                  <Image
                     src={experience.logo}
                     alt={`${experience.company} logo`}
+                    width={64}
+                    height={64}
                     className="h-12 w-12 object-contain sm:h-16 sm:w-16"
                   />
                 )}

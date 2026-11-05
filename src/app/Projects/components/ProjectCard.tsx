@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Project } from "../projects";
 import ExternalLinkButton from "./ExternalLinkButton";
@@ -12,10 +13,12 @@ type props = {
     return (
         <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
         <div className="relative aspect-video overflow-hidden border-b border-border bg-white">
-            <img
+            <Image
                 src={project.cover ?? project.images[0]}
                 alt={project.name}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                fill
+                sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
             />
             {photoCount > 1 && (
                 <span className="absolute right-3 bottom-3 rounded-md bg-ink/75 px-2 py-0.5 text-xs font-medium text-white">

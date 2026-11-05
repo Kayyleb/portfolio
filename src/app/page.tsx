@@ -1,18 +1,26 @@
+import Image from "next/image";
 import ProjectCard from "./Projects/components/ProjectCard";
 import { projects } from "./Projects/projects";
 import ExperienceTimeline from "./Experience/components/ExperienceTimeline";
 import { experiences } from "./Experience/experience";
 
+const SKILLS = ["Python", "C#", "C++", "JavaScript", "TypeScript", "SQL", "React", "React Native", "Firebase", "SQLite", "MSSQL", "BigQuery", "Git", "Unity"];
+
 export default function Home() {
   const featuredProjects = projects.filter((project) => project.featured);
 
   return (
-    <main className="min-h-screen bg-bg px-6 py-20 text-ink sm:px-12 sm:py-28">
+    <div className="min-h-screen bg-bg px-6 py-20 text-ink sm:px-12 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="flex items-center gap-8">
-          <img
+          <Image
             src="/profile2.jpg"
             alt="Kayleb Cook"
+            width={240}
+            height={240}
+            sizes="(min-width: 640px) 240px, 96px"
+            loading="eager"
+            fetchPriority="high"
             className="h-24 w-24 rounded-full border border-border object-cover sm:h-60 sm:w-60"
           />
 
@@ -95,7 +103,7 @@ export default function Home() {
           </h2>
 
           <div className="mt-4 flex flex-wrap gap-2.5">
-            {["Python", "C#", "C++", "JavaScript", "TypeScript", "SQL", "React", "React Native", "Firebase", "SQLite", "MSSQL", "BigQuery", "Git", "Unity"].map((skill) => (
+            {SKILLS.map((skill) => (
               <span
                 key={skill}
                 className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium text-forest"
@@ -117,9 +125,9 @@ export default function Home() {
         </div>
 
         <div className="mt-20">
-          <p className="text-2xl font-semibold tracking-tight text-forest">
+          <h2 className="text-2xl font-semibold tracking-tight text-forest">
             Featured Projects
-          </p>
+          </h2>
 
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {featuredProjects.map((project) => (
@@ -143,6 +151,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

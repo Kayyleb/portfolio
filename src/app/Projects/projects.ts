@@ -78,7 +78,7 @@ export type Project = {
       link: "https://github.com/Kayyleb/web_billiards",
       linkLabel: "View code",
       images: [],
-      cover: "/billiards-cover.png",
+      cover: "/billiards-cover.jpg",
       playable: "billiards",
       featured: false,
     },

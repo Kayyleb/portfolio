@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { bakeGraphics } from './bake';
 import { COLORS, FONT } from '../config';
 import { ballIconKey } from '../art/ballArt';
 import { CUE_LENGTH, CUE_TEX_SCALE, ensureCueTexture } from '../art/cueArt';
@@ -37,6 +38,7 @@ export class PowerBar {
     panel(g, X - W / 2 - 10, TOP - 14, W + 20, H + 28, 20);
     g.fillStyle(0x040d18, 1);
     g.fillRoundedRect(X - W / 2, TOP, W, H, 14);
+    bakeGraphics(g, 'ui_power_panel', X - W / 2 - 14, TOP - 18, W + 28, H + 41);
     this.fill = scene.add.graphics().setDepth(10);
     const ticks = scene.add.graphics().setDepth(10);
     ticks.lineStyle(2, 0xffffff, 0.15);
@@ -44,6 +46,7 @@ export class PowerBar {
       const y = TOP + (H * i) / 10;
       ticks.lineBetween(X + W / 2 - (i % 5 === 0 ? 16 : 9), y, X + W / 2 - 2, y);
     }
+    bakeGraphics(ticks, 'ui_power_ticks', X + W / 2 - 20, TOP - 4, 22, H + 8);
 
     const len = H * 0.66;
     this.cue = scene.add.image(X, TOP, ensureCueTexture(scene))
@@ -107,12 +110,14 @@ export class SpinControl {
     g.fillCircle(X, Y, R + 12);
     g.lineStyle(2, COLORS.panelEdge, 0.8);
     g.strokeCircle(X, Y, R + 12);
+    bakeGraphics(g, 'ui_spin_dial', X - R - 16, Y - R - 16, (R + 16) * 2, (R + 16) * 2 + 6);
     scene.add.image(X, Y, ballIconKey(scene, 0, 4)).setDisplaySize(R * 2 + 4, R * 2 + 4).setDepth(10);
     const cross = scene.add.graphics().setDepth(10);
     cross.lineStyle(1, 0x000000, 0.18);
     cross.lineBetween(X - R, Y, X + R, Y);
     cross.lineBetween(X, Y - R, X, Y + R);
     cross.strokeCircle(X, Y, R * 0.72);
+    bakeGraphics(cross, 'ui_spin_cross', X - R - 2, Y - R - 2, R * 2 + 4, R * 2 + 4);
     this.dot = scene.add.graphics().setDepth(10);
     label(scene, X, Y - R - 32, 'SPIN');
     this.setSpin({ top: 0, side: 0 });
@@ -165,6 +170,7 @@ export class FineTune {
     panel(g, X - W / 2 - 10, TOP - 14, W + 20, BOTTOM - TOP + 28, 20);
     g.fillStyle(0x040d18, 1);
     g.fillRoundedRect(X - W / 2, TOP, W, BOTTOM - TOP, 12);
+    bakeGraphics(g, 'ui_fine_panel', X - W / 2 - 14, TOP - 18, W + 28, BOTTOM - TOP + 41);
     this.ridges = scene.add.graphics().setDepth(10);
     label(scene, X, TOP - 38, 'AIM');
     label(scene, X, BOTTOM + 34, 'FINE');

@@ -1,5 +1,5 @@
 import { CONFIG, PHYSICS as P } from './config';
-import { TableGeom, closestPointOnSegment } from './geometry';
+import type { TableGeom } from './geometry';
 import type { Spin } from './types';
 
 // A small, deterministic pool physics engine: equal-mass elastic ball collisions,
@@ -32,9 +32,11 @@ export class PoolPhysics {
   private cueTravel = 0;
   private sideLeft = 0;
   private pending = { x: 0, y: 0, frames: 0 }; // follow/draw being bent in
+  private readonly pocketReach: number;      // furthest any capture circle reaches inside the playfield
 
   constructor(readonly table: TableGeom, balls: SimBall[]) {
     this.balls = balls;
+    this.pocketReach = Math.max(...table.pockets.map(p => p.captureR));
     const cue = balls.find(b => b.num === 0);
     if (!cue) throw new Error('PoolPhysics needs a cue ball (num 0)');
     this.cue = cue;
@@ -133,9 +135,12 @@ export class PoolPhysics {
       for (let j = i + 1; j < balls.length; j++) {
         const b = balls[j];
         if (!b.onTable) continue;
-        if (a.vx === 0 && a.vy === 0 && b.vx === 0 && b.vy === 0) continue;
+        // Cheapest rejections first: most pairs are nowhere near each other
         const dx = b.x - a.x;
+        if (dx >= minD || dx <= -minD) continue;
         const dy = b.y - a.y;
+        if (dy >= minD || dy <= -minD) continue;
+        if (a.vx === 0 && a.vy === 0 && b.vx === 0 && b.vy === 0) continue;
         const d2 = dx * dx + dy * dy;
         if (d2 >= minD2 || d2 === 0) continue;
 
@@ -186,19 +191,30 @@ export class PoolPhysics {
 
   private collideCushions(out?: PhysEvent[]): void {
     const e = P.CUSHION_RESTITUTION;
+    const g = this.table;
     for (const b of this.balls) {
       if (!b.onTable || (b.vx === 0 && b.vy === 0)) continue;
-      for (const seg of this.table.segments) {
-        const c = closestPointOnSegment(seg, b.x, b.y);
-        const dx = b.x - c.x;
-        const dy = b.y - c.y;
+      // Every cushion segment sits on or outside the playfield edge, so a ball more
+      // than a radius inside it can't be touching one. That's most balls, most of the time.
+      if (b.x > g.left + R && b.x < g.right - R && b.y > g.top + R && b.y < g.bottom - R) continue;
+      for (const seg of g.segments) {
+        // Closest point on the segment, inlined to avoid allocating in the hot loop
+        const ex = seg.bx - seg.ax;
+        const ey = seg.by - seg.ay;
+        const len2 = ex * ex + ey * ey;
+        let t = len2 > 0 ? ((b.x - seg.ax) * ex + (b.y - seg.ay) * ey) / len2 : 0;
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        const cx = seg.ax + ex * t;
+        const cy = seg.ay + ey * t;
+        const dx = b.x - cx;
+        const dy = b.y - cy;
         const d2 = dx * dx + dy * dy;
         if (d2 >= R * R) continue;
         const d = Math.sqrt(d2) || 0.0001;
         const nx = dx / d;
         const ny = dy / d;
-        b.x = c.x + nx * R;
-        b.y = c.y + ny * R;
+        b.x = cx + nx * R;
+        b.y = cy + ny * R;
 
         const vn = b.vx * nx + b.vy * ny;
         if (vn >= 0) continue;
@@ -233,8 +249,12 @@ export class PoolPhysics {
   private capturePockets(out?: PhysEvent[]): void {
     const g = this.table;
     const slack = g.right - g.left; // only used to find the nearest pocket
+    // Every pocket centre sits outside the playfield, so no capture circle reaches
+    // further in than its radius. Balls deeper in than that can't drop this substep.
+    const reach = this.pocketReach;
     for (const b of this.balls) {
       if (!b.onTable) continue;
+      if (b.x > g.left + reach && b.x < g.right - reach && b.y > g.top + reach && b.y < g.bottom - reach) continue;
       let dropped = -1;
       for (let i = 0; i < g.pockets.length; i++) {
         const p = g.pockets[i];

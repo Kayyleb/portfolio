@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type props = {
     name: string;
@@ -10,58 +11,74 @@ type props = {
   // Photo grid; clicking a photo opens it full size, arrow keys flip through, Esc closes
   export default function ProjectGallery({ name, images }: props) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const isOpen = openIndex !== null;
+    const count = images.length;
 
     const showPrevious = () =>
-      setOpenIndex((index) => index === null ? null : (index - 1 + images.length) % images.length);
+      setOpenIndex((index) => index === null ? null : (index - 1 + count) % count);
     const showNext = () =>
-      setOpenIndex((index) => index === null ? null : (index + 1) % images.length);
+      setOpenIndex((index) => index === null ? null : (index + 1) % count);
 
     useEffect(() => {
-      if (openIndex === null) return;
+      if (!isOpen) return;
 
       const onKeyDown = (event: KeyboardEvent) => {
         if (event.key === "Escape") setOpenIndex(null);
-        if (event.key === "ArrowLeft") showPrevious();
-        if (event.key === "ArrowRight") showNext();
+        if (event.key === "ArrowLeft") setOpenIndex((index) => index === null ? null : (index - 1 + count) % count);
+        if (event.key === "ArrowRight") setOpenIndex((index) => index === null ? null : (index + 1) % count);
       };
+      // Keep the page behind the lightbox from scrolling
+      const previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
       window.addEventListener("keydown", onKeyDown);
-      return () => window.removeEventListener("keydown", onKeyDown);
-    });
+      return () => {
+        window.removeEventListener("keydown", onKeyDown);
+        document.body.style.overflow = previousOverflow;
+      };
+    }, [isOpen, count]);
 
     return (
       <>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {images.map((image, index) => (
-            <button
-              key={image}
-              onClick={() => setOpenIndex(index)}
-              className={`group overflow-hidden rounded-xl border border-border bg-surface ${
-                // A lone photo, or the first of an odd number, spans the full width
-                index === 0 && images.length % 2 === 1 ? "sm:col-span-2" : ""
-              }`}
-            >
-              <img
-                src={image}
-                alt={`${name} screenshot ${index + 1}`}
-                className="mx-auto max-h-[480px] w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-              />
-            </button>
-          ))}
+          {images.map((image, index) => {
+            // A lone photo, or the first of an odd number, spans the full width
+            const wide = index === 0 && count % 2 === 1;
+            return (
+              <button
+                key={image}
+                onClick={() => setOpenIndex(index)}
+                className={`group overflow-hidden rounded-xl border border-border bg-surface ${wide ? "sm:col-span-2" : ""}`}
+              >
+                {/* Photos vary in shape, so size them by their own aspect ratio */}
+                <Image
+                  src={image}
+                  alt={`${name} screenshot ${index + 1}`}
+                  width={1600}
+                  height={1000}
+                  sizes={wide ? "(min-width: 896px) 896px, 100vw" : "(min-width: 640px) 448px, 100vw"}
+                  className="mx-auto h-auto max-h-[480px] w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </button>
+            );
+          })}
         </div>
 
         {openIndex !== null && (
           <div
             role="dialog"
             aria-modal="true"
-            aria-label={`${name} photo ${openIndex + 1} of ${images.length}`}
+            aria-label={`${name} photo ${openIndex + 1} of ${count}`}
             onClick={() => setOpenIndex(null)}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 sm:p-10"
           >
-            <img
+            <Image
               src={images[openIndex]}
               alt={`${name} screenshot ${openIndex + 1}`}
+              width={1920}
+              height={1200}
+              sizes="100vw"
               onClick={(event) => event.stopPropagation()}
-              className="max-h-full max-w-full rounded-lg object-contain"
+              className="h-auto max-h-full w-auto max-w-full rounded-lg object-contain"
             />
 
             <button
@@ -75,7 +92,7 @@ type props = {
               </svg>
             </button>
 
-            {images.length > 1 && (
+            {count > 1 && (
               <>
                 <button
                   onClick={(event) => { event.stopPropagation(); showPrevious(); }}
@@ -96,7 +113,7 @@ type props = {
                   </svg>
                 </button>
                 <span className="absolute bottom-4 text-sm text-white/80">
-                  {openIndex + 1} / {images.length}
+                  {openIndex + 1} / {count}
                 </span>
               </>
             )}

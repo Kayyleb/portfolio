@@ -3,7 +3,8 @@ import { CONFIG, PHYSICS, TABLE } from '../config';
 import { Pocket, TABLE_GEOM, canPlaceCueBall, findFreeSpot } from '../geometry';
 import { PhysEvent, PoolPhysics, SimBall } from '../physics';
 import { predictAim } from '../predict';
-import { AiShot, Difficulty, planShot, remainingOn } from '../ai';
+import { AiShot, Difficulty, remainingOn } from '../ai';
+import { requestAiShot } from '../aiClient';
 import {
   GameState, PlayerIndex, Potted, Remaining, ShotOutcome,
   isOnEight, legalTargets, newGame, resolveShot, resolveTimeout,
@@ -54,12 +55,15 @@ class BallView {
     if (this.sinking || !b.onTable) return;
     const dx = b.x - this.lastX;
     const dy = b.y - this.lastY;
-    if (dx !== 0 || dy !== 0) {
-      this.skin.roll(dx, dy);
-      this.lastX = b.x;
-      this.lastY = b.y;
+    if (dx === 0 && dy === 0) {
+      // At rest: draw any leftover roll so the ball settles showing its exact final face
+      this.skin.render();
+      return;
     }
-    this.skin.render();
+    this.skin.roll(dx, dy);
+    this.skin.renderIfVisible();
+    this.lastX = b.x;
+    this.lastY = b.y;
     this.sprite.setPosition(b.x, b.y);
     this.shadow.setPosition(b.x + 3, b.y + 5);
   }
@@ -117,6 +121,7 @@ export class GameScene extends Phaser.Scene {
   private cueHome: Vec = { x: 0, y: 0 };
   private cueAnim = { pull: 0 };
   private spaceCharging = false;
+  private aiTurn = 0;              // bumped per computer turn, so a late answer from the worker is ignored
 
   private hud!: Hud;
   private powerBar!: PowerBar;
@@ -147,6 +152,7 @@ export class GameScene extends Phaser.Scene {
       : [{ name: 'Player 1', isAi: false, badge: 'P1' }, { name: 'Player 2', isAi: false, badge: 'P2' }];
 
     // scene.restart() reuses this instance, so reset everything.
+    this.aiTurn++;
     this.views = new Map();
     this.phase = 'wait';
     this.drag = null;
@@ -501,9 +507,16 @@ export class GameScene extends Phaser.Scene {
   private beginAiTurn(): void {
     this.phase = 'ai';
     this.hud.setStatus(`${this.players[this.state.turn].name} is thinking…`);
-    this.time.delayedCall(700, () => {
-      if (this.phase !== 'ai') return;
-      this.runAiShot(planShot(this.phys, this.state, this.difficulty));
+    // The shot search runs in a worker so the game keeps animating. Still take at
+    // least 700ms, so the computer looks like it's thinking rather than snapping.
+    const turn = ++this.aiTurn;
+    const started = this.time.now;
+    void requestAiShot(this.phys, this.state, this.difficulty).then(shot => {
+      if (turn !== this.aiTurn || !this.sys.isActive()) return;
+      this.time.delayedCall(Math.max(0, 700 - (this.time.now - started)), () => {
+        if (turn !== this.aiTurn || this.phase !== 'ai') return;
+        this.runAiShot(shot);
+      });
     });
   }
 

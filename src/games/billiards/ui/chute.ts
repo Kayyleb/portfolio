@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { COLORS } from '../config';
 import { ballIconKey } from '../art/ballArt';
+import { bakeGraphics } from './bake';
 
 // Glass tube beside the table that potted balls roll down into.
 export class PocketChute {
@@ -20,9 +21,11 @@ export class PocketChute {
     g.fillRoundedRect(X - 20, TOP, 40, BOTTOM - TOP, 20);
     g.lineStyle(2, COLORS.panelEdge, 0.8);
     g.strokeRoundedRect(X - 20, TOP, 40, BOTTOM - TOP, 20);
+    bakeGraphics(g, 'ui_chute', X - 22, TOP - 2, 44, BOTTOM - TOP + 9);
     const shine = scene.add.graphics().setDepth(12);
     shine.fillStyle(0xffffff, 0.08);
     shine.fillRoundedRect(X - 15, TOP + 8, 8, BOTTOM - TOP - 16, 4);
+    bakeGraphics(shine, 'ui_chute_shine', X - 16, TOP + 7, 10, BOTTOM - TOP - 14);
   }
 
   add(num: number): void {

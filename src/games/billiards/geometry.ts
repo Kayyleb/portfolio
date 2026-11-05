@@ -144,8 +144,14 @@ export function closestPointOnSegment(s: Segment, px: number, py: number): Vec {
   return { x: s.ax + ex * t, y: s.ay + ey * t };
 }
 
-// Distance from point P to segment AB.
+// Distance from point P to segment AB. Allocation-free, since the AI calls it constantly.
 export function distToSegment(px: number, py: number, ax: number, ay: number, bx: number, by: number): number {
-  const c = closestPointOnSegment({ ax, ay, bx, by }, px, py);
-  return Math.hypot(px - c.x, py - c.y);
+  const ex = bx - ax;
+  const ey = by - ay;
+  const len2 = ex * ex + ey * ey;
+  let t = len2 > 0 ? ((px - ax) * ex + (py - ay) * ey) / len2 : 0;
+  t = t < 0 ? 0 : t > 1 ? 1 : t;
+  const dx = px - (ax + ex * t);
+  const dy = py - (ay + ey * t);
+  return Math.sqrt(dx * dx + dy * dy);
 }

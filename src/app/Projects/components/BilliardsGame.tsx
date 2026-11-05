@@ -16,15 +16,18 @@ export default function BilliardsGame() {
     useEffect(() => {
       if (!playing) return;
       let game: Phaser.Game | null = null;
+      let stopAiWorker: (() => void) | null = null;
       let cancelled = false;
 
       const boot = async () => {
-        const [{ default: PhaserLib }, { CONFIG, FONT }, { MenuScene }, { GameScene }] = await Promise.all([
+        const [{ default: PhaserLib }, { CONFIG, FONT }, { MenuScene }, { GameScene }, aiClient] = await Promise.all([
           import("phaser"),
           import("../../../games/billiards/config"),
           import("../../../games/billiards/scenes/MenuScene"),
           import("../../../games/billiards/scenes/GameScene"),
+          import("../../../games/billiards/aiClient"),
         ]);
+        stopAiWorker = aiClient.stopAiWorker;
         // Canvas text renders with whatever font is ready at draw time, so wait for ours.
         await Promise.all(["500", "700", "800"].map((w) => document.fonts.load(`${w} 32px ${family}`))).catch(() => undefined);
         if (cancelled || !gameRef.current) return;
@@ -37,6 +40,10 @@ export default function BilliardsGame() {
           parent: gameRef.current,
           backgroundColor: "#040c18",
           antialias: true,
+          // Phaser compiles a new shader variant each time a draw batch uses a new number of
+          // textures, which stalls the first game mid-shot. One texture per batch means a single
+          // shader, at the cost of a few extra draw calls per frame.
+          render: { maxTextures: 1 },
           scale: {
             mode: PhaserLib.Scale.FIT,
             autoCenter: PhaserLib.Scale.CENTER_BOTH,
@@ -57,6 +64,7 @@ export default function BilliardsGame() {
         frame?.removeEventListener("wheel", stopScroll);
         game?.destroy(true);
         game = null;
+        stopAiWorker?.();
       };
     }, [playing, family]);
 

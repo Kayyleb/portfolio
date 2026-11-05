@@ -5,6 +5,7 @@ import { ballIconKey, iconScaleFor } from '../art/ballArt';
 import { ensureBackgroundTexture } from '../art/tableArt';
 import { createButton, createIconButton, shade } from '../ui/button';
 import { sfx } from '../sound';
+import { bakeGraphics } from '../ui/bake';
 
 const DIFFICULTIES: Difficulty[] = ['easy', 'normal', 'hard'];
 
@@ -82,6 +83,7 @@ export class MenuScene extends Phaser.Scene {
     g.fillRoundedRect(cx - hw / 2, hy, hw, hh, 24);
     g.lineStyle(2, COLORS.panelEdge, 0.8);
     g.strokeRoundedRect(cx - hw / 2, hy, hw, hh, 24);
+    bakeGraphics(g, 'menu_howto_panel', cx - hw / 2 - 2, hy - 2, hw + 4, hh + 9);
     this.add.text(cx, hy + 26, 'HOW TO PLAY', {
       fontFamily: FONT.family, fontSize: '20px', fontStyle: '800', color: COLORS.goldCss, resolution: 2,
     }).setOrigin(0.5);
