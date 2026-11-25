@@ -4,7 +4,7 @@ import { projects } from "./Projects/projects";
 import ExperienceTimeline from "./Experience/components/ExperienceTimeline";
 import { experiences } from "./Experience/experience";
 
-const SKILLS = ["Python", "C#", "C++", "JavaScript", "TypeScript", "SQL", "React", "React Native", "Firebase", "SQLite", "MSSQL", "BigQuery", "Git", "Unity"];
+const SKILLS = ["Python", "C#", "C++", "JavaScript", "TypeScript", "SQL", "React", "React Native", "Supabase", "PostgreSQL", "SQLite", "MSSQL", "BigQuery", "Git", "Unity"];
 
 export default function Home() {
   const featuredProjects = projects.filter((project) => project.featured);
